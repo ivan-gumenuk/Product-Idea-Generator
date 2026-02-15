@@ -39,7 +39,7 @@ function IdeaCard({ idea }: { idea: ProductIdea }) {
           rel="noopener noreferrer"
           className="text-slate-600 hover:text-slate-900 hover:underline"
         >
-          r/{idea.source_subreddit}
+          {idea.source_subreddit}
         </a>
       </div>
     </article>
@@ -94,7 +94,7 @@ export function IdeasFeed() {
   if (ideas.length === 0) {
     return (
       <div className="rounded-xl border border-slate-200 bg-slate-50 p-8 text-center text-slate-600">
-        No ideas yet. Run the idea generator to populate the feed (fallback mock ideas work even without OpenAI key).
+        No ideas yet. Run the idea generator to populate the feed.
       </div>
     );
   }

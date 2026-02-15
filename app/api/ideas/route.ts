@@ -50,6 +50,21 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
       offset,
     });
 
+    if (result.data.length === 0) {
+      console.warn("No ideas found, falling back to mock ideas feed");
+      const fallback = buildFallbackIdeas(topic as TopicSlug | undefined, limit, offset);
+  
+      return NextResponse.json({
+        data: fallback.data,
+        meta: {
+          total: fallback.total,
+          limit,
+          offset,
+          fallback: true,
+        },
+      });
+    }
+
     return NextResponse.json({
       data: result.data,
       meta: { total: result.total, limit, offset },
