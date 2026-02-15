@@ -94,7 +94,7 @@ export function IdeasFeed() {
   if (ideas.length === 0) {
     return (
       <div className="rounded-xl border border-slate-200 bg-slate-50 p-8 text-center text-slate-600">
-        No ideas yet. Run the idea generator to populate the feed.
+        No ideas yet. Run the idea generator to populate the feed (fallback mock ideas work even without OpenAI key).
       </div>
     );
   }
