@@ -8,7 +8,8 @@ MVP SaaS that helps founders discover product ideas from Reddit: tracks popular 
 - **Auth & DB:** Supabase (Auth + Postgres)
 - **LLM:** OpenAI (prompts in `config/prompts.ts`)
 - **Email:** Resend (digest + unsubscribe link)
-- **Reddit data:** Mock JSON (`data/mock-reddit.json`); optional Reddit API later
+- **Reddit data:** Mock JSON (`data/mock-reddit.json`)
+- **Fallback idea generation:** Pre-generated mock ideas (`data/mock-generated-ideas.json`) when OpenAI is unavailable
 
 ## Run locally
 
@@ -126,7 +127,7 @@ Apply `supabase/migrations/001_initial.sql` in the Supabase dashboard (SQL Edito
 
 5. **Seed ideas (optional)**
 
-   Call the generator once to populate the feed (requires `OPENAI_API_KEY` and Supabase configured):
+   Call the generator once to populate the feed (requires Supabase configured). If `OPENAI_API_KEY` is missing or LLM call fails, API will use fallback ideas from `data/mock-generated-ideas.json`:
 
    ```bash
    curl http://localhost:3000/api/cron/generate-ideas
