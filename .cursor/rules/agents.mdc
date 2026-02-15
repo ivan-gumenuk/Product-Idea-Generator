@@ -1,0 +1,129 @@
+---
+description: TypeScript / Node.js fullstack — strict, production-ready code, strong typing, clear architecture
+alwaysApply: true
+---
+
+**Goal:** strict, production-ready code with strong typing and clear architecture.
+**Logs:** log all my prompts to `.cursor/logs.md`.
+
+# =========================================================
+# 0) Output format
+# =========================================================
+- Prefer small, focused diffs.
+- When you generate code, include all required imports.
+- Do not invent dependencies: use only what exists in the repo; if unsure, write framework-agnostic code and note assumptions.
+- Provide file paths in headers when creating multiple files.
+
+# =========================================================
+# 1) TypeScript rules (strict)
+# =========================================================
+- Assume "strict": true.
+- Avoid `any`. If unavoidable, use `unknown` first, then narrow. Document why.
+- No implicit types for public APIs: export functions/classes must have explicit return types.
+- Prefer:
+  - `interface` for DTOs / object shapes that may be extended.
+  - `type` for unions, mapped/utility types.
+- Prefer `readonly` for immutable fields and arrays (`readonly T[]`).
+- Use `as const` for constant objects and string literal unions.
+- Never use non-null assertions `!` unless proven safe (and add a comment why).
+- Never swallow errors; always handle with a typed error strategy.
+
+# =========================================================
+# 2) Backend structure & architecture
+# =========================================================
+- Do not put business logic in controllers/route handlers.
+- Use layering:
+  - controller/handler: parse request, auth, call service, map response
+  - service: business logic, orchestration, transactions
+  - repository: data access only (DB/ORM queries)
+  - dto/validators: runtime validation and typing
+- Functions should do one thing; max nesting depth: 3.
+
+# =========================================================
+# 3) Validation & API safety
+# =========================================================
+- Validate all inbound data: body, params, query.
+- Prefer `zod` (or existing validation lib in repo). Do not accept unvalidated input.
+- Do not trust client-provided IDs, roles, or permissions.
+- Use standardized response shapes:
+  - success: `{ data, meta? }`
+  - error: `{ error: { code, message, details? } }`
+- Lists must be paginated (limit/offset or cursor), with sane defaults and max limits.
+
+# =========================================================
+# 4) Error handling
+# =========================================================
+- Centralized error handling (middleware / global filter).
+- Prefer custom typed errors:
+  - `AppError` with `code`, `message`, `status`, `details?`
+- Never throw raw `Error` for expected failures.
+- Always include enough context for debugging, but never include secrets.
+
+# =========================================================
+# 5) Async & concurrency
+# =========================================================
+- Prefer `async/await`. Avoid `.then()` chains.
+- Ensure all promises are awaited or explicitly handled.
+- Use `Promise.all` for independent async operations.
+- Avoid blocking sync Node APIs in request paths.
+
+# =========================================================
+# 6) Database & ORM
+# =========================================================
+- Do not expose ORM entities directly in API responses; map to DTOs.
+- Avoid N+1 queries; batch or join when needed.
+- Use transactions for multi-step writes that must be atomic.
+- Avoid raw SQL unless required; if used, parameterize and isolate in repository layer.
+
+# =========================================================
+# 7) Frontend (React / Next.js) rules
+# =========================================================
+- Prefer feature-based folder structure.
+- Keep components small (< ~200 LOC). Extract logic into hooks/services.
+- Server state: prefer React Query / TanStack Query (or existing lib in repo).
+- Avoid `React.FC`. Type props explicitly.
+- No business logic in presentational components.
+- Use typed API clients; never assume response shapes without validation/typing.
+
+# =========================================================
+# 8) Security
+# =========================================================
+- Config: use env vars for secrets/config; never commit secrets or hardcode in code.
+- Never log secrets, tokens, passwords, or full request bodies in production.
+- Use HTTP-only cookies for session tokens when applicable.
+- Enforce rate limiting and CORS explicitly (if part of stack).
+- Sanitize and validate all user input.
+- Prefer least-privilege access checks at the service layer.
+
+# =========================================================
+# 9) Testing
+# =========================================================
+- Add/maintain tests for new behavior:
+  - unit tests for services
+  - integration tests for API routes
+- Prefer deterministic tests: avoid time/network randomness; mock where appropriate.
+- Keep tests focused and readable.
+
+# =========================================================
+# 10) Code quality & style
+# =========================================================
+- Follow existing ESLint/Prettier rules in the repo.
+- No duplicated code: extract shared utilities.
+- Prefer early returns to reduce nesting.
+- Prefer named constants over magic numbers/strings.
+- Add JSDoc only when behavior is non-obvious.
+
+# =========================================================
+# 11) Git/PR hygiene (when generating suggestions)
+# =========================================================
+- Use conventional commit messages in examples.
+- Prefer small PRs with a single responsibility.
+- Include migration notes when DB schema or API contracts change.
+
+# =========================================================
+# 12) Cursor-specific behavior
+# =========================================================
+- Before generating large changes, scan for existing patterns and reuse them.
+- Do not introduce new libraries without clear need and explicit note.
+- When uncertain about framework (Express/Nest/Next), write framework-agnostic helpers and clearly mark integration points.
+- Always prefer type-safe code and runtime validation over assumptions.

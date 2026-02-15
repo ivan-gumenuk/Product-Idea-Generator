@@ -1,0 +1,37 @@
+[
+  {
+    "subreddit": "SideProject",
+    "title": "Tired of switching between 10 tabs to check API rate limits",
+    "body": "I'm building a small SaaS and I have Stripe, SendGrid, and a few other APIs. Every time something fails I have to open each dashboard. Would pay for a single dashboard that shows all rate limits and usage in one place.",
+    "url": "https://reddit.com/r/SideProject/comments/example1",
+    "topic": "devtools"
+  },
+  {
+    "subreddit": "startups",
+    "title": "Finding a co-founder is impossible",
+    "body": "I have the technical skills but no one to handle sales and marketing. Tried co-founder matching sites but they're full of idea people with no track record. Where do technical founders actually find serious co-founders?",
+    "url": "https://reddit.com/r/startups/comments/example2",
+    "topic": "other"
+  },
+  {
+    "subreddit": "learnprogramming",
+    "title": "I forget everything after finishing a tutorial",
+    "body": "I complete a course, feel great, then two weeks later I can't remember how to set up a basic project. Need something that spaces out review and actually sticks. Anki for code?",
+    "url": "https://reddit.com/r/learnprogramming/comments/example3",
+    "topic": "education"
+  },
+  {
+    "subreddit": "productivity",
+    "title": "My calendar and tasks are never in sync",
+    "body": "I use Google Calendar for meetings and Todoist for tasks. Half the time I double-book or forget to block time for deep work. Would love one place that shows both and lets me time-block from my task list.",
+    "url": "https://reddit.com/r/productivity/comments/example4",
+    "topic": "productivity"
+  },
+  {
+    "subreddit": "smallbusiness",
+    "title": "Invoicing for freelancers that isn't overkill",
+    "body": "QuickBooks is too heavy. I just need to send an invoice, track if it's paid, and maybe reminders. Everything else is either enterprise or looks like a scam.",
+    "url": "https://reddit.com/r/smallbusiness/comments/example5",
+    "topic": "finance"
+  }
+]
